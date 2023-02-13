@@ -2,7 +2,7 @@
 import {  IsInt, IsNotEmpty, IsString, IsStrongPassword, Length } from "class-validator";
 
 
-export class AdminForm{
+export class Insert{
     @IsNotEmpty({message: 'Name can not be empty'})
     name: string;
     @IsInt({message:'Age must be an Integer value'})
