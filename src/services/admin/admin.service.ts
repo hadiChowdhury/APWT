@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AdminDto } from 'src/DTOs/adminDTO.dto';
 import { AdminEntity } from 'src/Entities/adminentity.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AdminService {
@@ -11,13 +12,34 @@ export class AdminService {
         private adminRepo: Repository<AdminEntity>,
       ) {}
 
-    insertUser(mydto:AdminDto):any 
+        // async signup(AdminDto) {
+        // const salt = await bcrypt.genSalt();
+        // const hassedpassed = await bcrypt.hash(AdminDto.password, salt);
+        // AdminDto.password= hassedpassed;
+        // return this.adminRepo.save(AdminDto);
+        // }
+    
+    
+
+
+
+
+
+
+
+
+        
+   async insertUser(mydto:AdminDto)
     {
         const adminaccount = new AdminEntity()
         adminaccount.name = mydto.name;
         adminaccount.email = mydto.email;
-        adminaccount.password = mydto.password;
+        
+        //adminaccount.password = mydto.password;
         adminaccount.address = mydto.address;
+        const salt = await bcrypt.genSalt();
+        const hassedpassed = await bcrypt.hash(mydto.password, salt);
+        adminaccount.password= hassedpassed;
        return this.adminRepo.save(adminaccount);
     }
 

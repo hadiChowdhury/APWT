@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,6 +9,7 @@ import { TeacherModule } from './modules/teacher/teacher.module';
 import { StudentService } from './services/student/student.service';
 
 @Module({
+  
   imports: [AdminModule,StudentModule,TeacherModule, TypeOrmModule.forRoot(
     {
       type: 'postgres',
@@ -15,9 +17,10 @@ import { StudentService } from './services/student/student.service';
       port: 5432,
       username: 'postgres',
       password: '1290',
-      database: 'ProjectData',
+      database: 'Pro',
       autoLoadEntities: true,
       synchronize: true,
+
     }
   )],
   controllers: [],

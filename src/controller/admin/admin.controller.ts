@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, FileTypeValidator, Get, MaxFileSizeValidator, Param, ParseFilePipe, ParseIntPipe, Post, Put, Query, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 import { AdminDto } from 'src/DTOs/adminDTO.dto';
-import { StudentDto } from 'src/DTOs/studentDTO.dto';
 import { StudentEntity } from 'src/Entities/studententity.entity';
 import { AdminService } from 'src/services/admin/admin.service';
 import { StudentService } from 'src/services/student/student.service';
@@ -16,6 +17,56 @@ export class AdminController {
       private studentService: StudentService,
       private teacherService: TeacherService
       ){}
+
+  //   @Post('/signup')
+  //   @UseInterceptors(FileInterceptor('myfile',
+  //   {storage:diskStorage({destination: './uploads',
+  //   filename: function (req, file, cb) {
+  //   cb(null,Date.now()+file.originalname)
+  //   }
+  //   })
+  //   }))
+  //  signup(@Body() mydto:AdminDto,@UploadedFile(  new ParseFilePipe({
+  //   validators: [
+  //     new MaxFileSizeValidator({ maxSize: 16000 }),
+  //     new FileTypeValidator({ fileType: 'png|jpg|jpeg|' }),
+  //   ],
+  // }),) file: Express.Multer.File){
+  
+  // mydto.filename = file.filename;  
+  
+  // return this.adminService.signup(mydto);
+  // // console.log(file)
+  
+  // }
+// 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+//   @Post('/signup')
+//   @UseInterceptors(FileInterceptor('myfile',
+//   {storage:diskStorage({
+//     destination:'./uploads',
+//     filename: function(req, file, cb){
+//       cb(null,Date.now()+file.originalname)
+//     }
+//   })
+// }))
+// signup(@Body() AdminDto:AdminDto,@UploadedFile(new ParseFilePipe({
+//    validators: [
+//      new MaxFileSizeValidator({ maxSize: 16000 }),
+//      new FileTypeValidator({ fileType: 'png|jpg|jpeg|' }),
+//    ],
+// }),) file: Express.Multer.File){
+//   AdminDto.filename = file.filename;  
+//   console.log(file);
+// return this.adminService.signup(AdminDto);
+
+// }
+// 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+
+
+
+
+
 
     @Get('/all')
     getAdmin(){

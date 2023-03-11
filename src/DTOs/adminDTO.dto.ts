@@ -10,4 +10,6 @@ export class AdminDto{
     password: string;
     
     address: string;
+
+    // filename: string; 
 }
